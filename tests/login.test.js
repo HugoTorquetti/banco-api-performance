@@ -3,9 +3,13 @@ import { sleep, check } from 'k6'; // Incluímos o check nessa importação pois
 
 
 export const options = {
-  // Define o número de usuários virtuais (VUs) e a duração do teste
-  vus: 10,
-  duration: '30s',
+  // Stage é uma lista de objetos que tem duration e target. 
+  // Duration = tempo de duração da estratégia, Target = quantidade de vu's que quero alcançar
+  stages: [
+    { duration: '5s', target: 10 },
+    { duration: '20s', target: 10 },
+    { duration: '5s', target: 0 },
+  ],
   // Define os thresholds de critérios para cada métrica
   thresholds: {
     http_req_duration: ['p(90)<3000', 'max<5000'],
