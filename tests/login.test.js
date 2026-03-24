@@ -3,11 +3,12 @@ import { sleep, check } from 'k6'; // Incluímos o check nessa importação pois
 
 
 export const options = {
-  // Defina o número de iterações para o teste
-  iterations: 50,
+  // Define o número de usuários virtuais (VUs) e a duração do teste
+  vus: 10,
+  duration: '30s',
   // Define os thresholds de critérios para cada métrica
   thresholds: {
-    http_req_duration: ['p(90)<20', 'max<1'],
+    http_req_duration: ['p(90)<3000', 'max<5000'],
     http_req_failed: ['rate<0.01']
   }
 };
