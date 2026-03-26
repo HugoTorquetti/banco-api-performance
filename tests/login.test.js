@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6'; // Incluímos o check nessa importação pois não precisamos dar o comando de importação duas vezes
-
+const postLogin = JSON.parse(open('../fixtures/postLogin.json')); // Aqui estamos importando o arquivo json que criamos para usar como payload no nosso teste.
 
 export const options = {
   // Stage é uma lista de objetos que tem duration e target. 
@@ -21,10 +21,9 @@ export default function () {
     // Tudo o que estiver aqui dentro será o nosso teste
     const url = 'http://localhost:3000/login';
     
-    const payload = JSON.stringify({
-        username: 'julio.lima',
-        senha: '123456',
-    });
+    postLogin.username = "junior.lima";;
+    console.log(postLogin);
+    const payload = JSON.stringify(postLogin);
 
     const params = {
         headers: {
