@@ -1,8 +1,9 @@
 import http from 'k6/http';
+import { pegarBaseUrl } from "../utils/variaveis.js"; // Aqui estamos importando a função pegarBaseUrl que criamos para pegar a variável de ambiente BASE_URL ou usar o valor padrão.
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'));
 
 export function obterToken() {
-    const url = 'http://localhost:3000/login';
+    const url = pegarBaseUrl() + '/login';
 
     const payload = JSON.stringify(postLogin);
 
